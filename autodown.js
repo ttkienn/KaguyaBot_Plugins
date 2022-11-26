@@ -39,11 +39,14 @@ export default {
 };
 
 function matchUrl(text) {
-	for (var matchArray, source = (text || "").toString(), urlArray = [], regexToken = /(((https?|ftp):\/\/)|(www\.))(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g; null !== (matchArray = regexToken.exec(source));) {
+	for (var matchArray, vaild = ["facebook", "soundcloud", "tiktok", "spotify", "youtube", "zingmp3"], source = (text || "").toString(), urlArray = [], regexToken = /(((https?|ftp):\/\/)|(www\.))(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/g; null !== (matchArray = regexToken.exec(source));) {
 		var token = matchArray[0];
 		urlArray.push(token)
 	}
-	return !!validateURL(urlArray[0]) && urlArray[0]
+	if (validateURL(urlArray[0]))
+		for (let i = 0; i < vaild.length; i++)
+			if (urlArray[0].includes(vaild[i])) return urlArray[0];
+	return !1
 }
 
 function validateURL(textval) {
