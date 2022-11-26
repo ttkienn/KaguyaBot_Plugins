@@ -5,6 +5,7 @@ export default {
     delay: 0,
     description: "Tự động tải video hoặc nhạc",
     author: "Thiệu Trung Kiên",
+    aliases: ["autoplay"],
     load: async ({ bot }) => {
         bot.global.autodown || (bot.global.autodown || (bot.global.autodown = {}), bot.global.allThreadID.forEach((threadID => {
             bot.global.autodown[threadID] = "on"
