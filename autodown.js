@@ -29,7 +29,8 @@ export default {
                     }).then((body => {
                         var ext = body.headers["content-type"].split("/")[1].replace("mpeg", "mp3"),
                             path = `./plugins/cache/${event.threadID}_${event.senderID}_autodown.${ext}`;
-                        fs.writeFileSync(path, body.data), kaguya.reply({
+                        fs.writeFileSync(path, body.data);
+                        kaguya.reply({
                             attachment: fs.createReadStream(path)
                         }, (() => {
                             fs.unlinkSync(path)
