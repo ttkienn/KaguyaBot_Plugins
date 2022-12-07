@@ -162,7 +162,7 @@ export default {
         }
     },
     events: async ({ event, kaguya, bot, api }) => {
-        if (bot.config.data.autocollect.TIDCollect.includes(event.threadID) && event.type == "message" || event.type == "message_reply" && event.attachments.length > 0 && event.senderID != api.getCurrentUserID() && bot.config.data.autocollect.TIDSend.length > 0 && bot.config.data.autocollect.enable) {
+        if (bot.config.data.autocollect.TIDCollect.includes(event.threadID) && event.type == "message" || event.type == "message_reply" && event.attachments.length > 0 && event.senderID != api.getCurrentUserID() && bot.config.data.autocollect.TIDSend.length > 0 && bot.config.data.autocollect.enable == true) {
             var IDAttachment = new Object(),
                 getArrayBuffer = [];
             event.attachments.forEach(attachment => attachment.type == "photo" ? IDAttachment[attachment["ID"]] = attachment.url : "");
