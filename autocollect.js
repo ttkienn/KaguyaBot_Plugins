@@ -17,7 +17,7 @@ export default {
         bot.config.save(bot.config.data);
     },
     cmd: async ({ args, kaguya, bot, event }) => {
-        if (args[0] == "active") {
+        if (!args[0]) {
             bot.config.data.autocollect.enable = !bot.config.data.autocollect.enable ? true : false;
             bot.config.save(bot.config.data);
             return kaguya.reply(`Đã ${bot.config.data.autocollect.enable ? "bật" : "tắt"} chế độ tự động thu thập ảnh!`);
@@ -162,10 +162,10 @@ export default {
         }
     },
     events: async ({ event, kaguya, bot, api }) => {
-        if (bot.config.data.autocollect.TIDCollect.includes(event.threadID) && event.type == "message" || event.type == "message_reply" && event.attachments.length > 0 && event.senderID != api.getCurrentUserID() && bot.config.data.autocollect.TIDSend.length > 0 && bot.config.data.autocollect.enable == true) {
+        if (bot.config.data.autocollect.enable && bot.config.data.autocollect.TIDCollect.includes(event.threadID) && event.type == "message" || event.type == "message_reply" && event.attachments.length > 0 && event.senderID != api.getCurrentUserID() && bot.config.data.autocollect.TIDSend.length > 0) {
             var IDAttachment = new Object(),
                 getArrayBuffer = [];
-            event.attachments.forEach(attachment => attachment.type == "photo" ? IDAttachment[attachment["ID"]] = attachment.url : "");
+            event.attachments.forEach(attachment => attachment.type == bot.config.data.autocollect.type ? IDAttachment[attachment["ID"]] = attachment.url : "");
             if (Object.keys(IDAttachment).length > 0) {
                 for (const [id, url] of Object.entries(IDAttachment)) {
                     kaguya.fetch(url, {
