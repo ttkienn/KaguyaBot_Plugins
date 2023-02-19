@@ -38,7 +38,6 @@ class HelpCommand {
   }
 
   async reply({ event, bot }) {
-    const onReply = bot.reply.get(event.messageReply?.messageID);
     if (!onReply || onReply.author !== event.senderID) return reply("Bạn không phải người gửi tin nhắn này!");
     const index = parseInt(event.body) - 1;
     const plugin = onReply.dataPlugins?.[index];
