@@ -84,3 +84,4 @@ class Cmd {
 }
 
 export default new Cmd();
+
