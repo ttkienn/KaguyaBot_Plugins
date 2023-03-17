@@ -4,7 +4,7 @@ class HelpCommand {
   delay = 5;
   descriptions = "Xem danh sách các plugins";
   author = "Thiệu Trung Kiên";
-
+  alias = ["listHelp", "listCommands"];
   async cmd({ event, args, bot }, page = 1) {
     const maxPage = Math.ceil(bot.plugins.length / 5);
     const startIndex = 5 * (page - 1);
